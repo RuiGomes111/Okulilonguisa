@@ -41,11 +41,7 @@ const questions: Question[]= [
     img: "/owl-DBwZenDH.png",
     answer: "Coruja",
   },
-  {
-    question: "Qual o planeta conhecido como Planeta Vermelho?",
-    options: ["Marte", "Terra", "Vénus", "Júpiter"],
-    answer: "Marte",
-  },
+  
 ];
 
 export default function Facil() {
