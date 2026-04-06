@@ -6,17 +6,14 @@ import AudioPlayer from "../components/audioplayer";
 import { useRef } from "react";
 import SoundEffects, { SoundEffectsHandle } from "../components/efeitosonoro";
 
-
-
-
 interface Question {
   question: string;
   options: string[];
-  img?: string; 
+  img?: string;
   answer: string;
 }
 
-const questions: Question[]= [
+const questions: Question[] = [
   {
     question: "Como se diz 'Elefante' em Umbundu?",
     options: ["Onjou", "Serpente", "Cavalo", "Pássaro"],
@@ -26,7 +23,7 @@ const questions: Question[]= [
   {
     question: "Como se diz 'Girafa' em Umbundu?",
     options: ["Cavalo", "Macaco", "Onça", "Girafa"],
-    img:"/giraffe-OwMJToyS.png",
+    img: "/giraffe-OwMJToyS.png",
     answer: "Girafa",
   },
   {
@@ -41,7 +38,6 @@ const questions: Question[]= [
     img: "/owl-DBwZenDH.png",
     answer: "Coruja",
   },
-  
 ];
 
 export default function Facil() {
@@ -66,7 +62,7 @@ export default function Facil() {
     setLocked(true);
 
     const correct = questions[current].answer === option;
-    if (correct){ 
+    if (correct) {
       setScore((s) => s + 1);
       soundRef.current?.playCorrect();
     } else {
@@ -95,7 +91,7 @@ export default function Facil() {
 
   const q = questions[current];
 
-  if (finished && score> 4) {
+  if (finished && score >= 4) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
         <div className="bg-white shadow-2xl rounded-3xl p-10 text-center w-full max-w-md">
@@ -106,15 +102,12 @@ export default function Facil() {
             {score} / {questions.length}
           </div>
           <button className="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl transition active:scale-95 shadow-lg shadow-blue-200">
-
-          <Link
-            href="../jogo_medio"
-            
-          >
-            Proxímo Nível
-          </Link>
+            <Link href="../jogo_medio">Proxímo Nível</Link>
           </button>
-          <Link href="/" className="block mt-6 text-gray-400 hover:text-gray-600 font-medium">
+          <Link
+            href="/"
+            className="block mt-6 text-gray-400 hover:text-gray-600 font-medium"
+          >
             Voltar ao início
           </Link>
         </div>
@@ -122,7 +115,7 @@ export default function Facil() {
     );
   }
 
-  if(finished){
+  if (finished) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
         <div className="bg-white shadow-2xl rounded-3xl p-10 text-center w-full max-w-md">
@@ -138,7 +131,10 @@ export default function Facil() {
           >
             Jogar novamente
           </button>
-          <Link href="/" className="block mt-6 text-gray-400 hover:text-gray-600 font-medium">
+          <Link
+            href="/"
+            className="block mt-6 text-gray-400 hover:text-gray-600 font-medium"
+          >
             Voltar ao início
           </Link>
         </div>
@@ -150,9 +146,8 @@ export default function Facil() {
     <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
       <div className="w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/20">
         <SoundEffects ref={soundRef} />
-       
+
         <div className="p-6 md:p-8 flex flex-col md:flex-row gap-4 md:gap-6">
-          
           {/* img */}
           <div className="w-full md:w-2/3">
             <div className="relative w-full h-48 md:h-60 bg-gray-100 rounded-3xl overflow-hidden border border-gray-200 shadow-inner">
@@ -182,15 +177,23 @@ export default function Facil() {
             </Link>
 
             <div className="flex-1 md:flex-none flex flex-col items-center justify-center bg-blue-50 rounded-2xl p-2 md:p-4 border border-blue-100">
-              <span className="text-[10px] md:text-xs text-blue-400 uppercase font-black">Pontuação</span>
-              <span className="text-base md:text-2xl font-black text-blue-600">⭐ {score}</span>
+              <span className="text-[10px] md:text-xs text-blue-400 uppercase font-black">
+                Pontuação
+              </span>
+              <span className="text-base md:text-2xl font-black text-blue-600">
+                ⭐ {score}
+              </span>
             </div>
 
             <div className="flex-1 md:flex-none flex flex-col items-center justify-center bg-purple-50 rounded-2xl p-2 md:p-4 border border-purple-100">
-              <span className="text-[10px] md:text-xs text-purple-400 uppercase font-black">Nível</span>
-              <span className="text-sm md:text-lg font-black text-purple-700">{current + 1}/{questions.length}</span>
+              <span className="text-[10px] md:text-xs text-purple-400 uppercase font-black">
+                Nível
+              </span>
+              <span className="text-sm md:text-lg font-black text-purple-700">
+                {current + 1}/{questions.length}
+              </span>
             </div>
-            <AudioPlayer/>
+            <AudioPlayer />
           </div>
         </div>
 
@@ -207,8 +210,11 @@ export default function Facil() {
               let style = `${colors[index % colors.length]} text-white`;
 
               if (selected) {
-                if (isSelected && isCorrect) style = "bg-green-500 text-white scale-[1.03] shadow-lg shadow-green-100";
-                else if (isSelected && !isCorrect) style = "bg-red-500 text-white";
+                if (isSelected && isCorrect)
+                  style =
+                    "bg-green-500 text-white scale-[1.03] shadow-lg shadow-green-100";
+                else if (isSelected && !isCorrect)
+                  style = "bg-red-500 text-white";
                 else style = "bg-gray-100 text-gray-300 opacity-40 grayscale";
               }
 
@@ -225,7 +231,7 @@ export default function Facil() {
             })}
           </div>
 
-        {/* barra de progresso */}
+          {/* barra de progresso */}
           <div className="mt-8 h-2 w-full bg-gray-100 rounded-full overflow-hidden">
             <div
               className="h-full bg-blue-600 transition-all duration-700 ease-in-out"
@@ -233,7 +239,6 @@ export default function Facil() {
             />
           </div>
         </div>
-
       </div>
     </div>
   );
