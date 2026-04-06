@@ -17,7 +17,7 @@ export default function MenuPrincipal() {
         Jogo de aprendizagem divertido! 🎮
       </p>
       <Image
-        src="/mascot-BA6D8Sl6.png"
+        src="/icon.png"
         alt="Umbundu Logo"
         width={180}
         height={90}
