@@ -2,6 +2,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import AudioPlayer from "../components/audioplayer";
+import { useRef } from "react";
+import SoundEffects, { SoundEffectsHandle } from "../components/efeitosonoro";
+
+
 
 
 interface Question {
@@ -49,6 +54,7 @@ export default function Facil() {
   const [selected, setSelected] = useState<string | null>(null);
   const [finished, setFinished] = useState(false);
   const [locked, setLocked] = useState(false);
+  const soundRef = useRef<SoundEffectsHandle>(null);
 
   const colors = [
     "bg-blue-500 hover:bg-blue-600",
@@ -64,7 +70,12 @@ export default function Facil() {
     setLocked(true);
 
     const correct = questions[current].answer === option;
-    if (correct) setScore((s) => s + 1);
+    if (correct){ 
+      setScore((s) => s + 1);
+      soundRef.current?.playCorrect();
+    } else {
+      soundRef.current?.playWrong();
+    }
 
     setTimeout(() => {
       const next = current + 1;
@@ -142,7 +153,7 @@ export default function Facil() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
       <div className="w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/20">
-        
+        <SoundEffects ref={soundRef} />
        
         <div className="p-6 md:p-8 flex flex-col md:flex-row gap-4 md:gap-6">
           
@@ -183,6 +194,7 @@ export default function Facil() {
               <span className="text-[10px] md:text-xs text-purple-400 uppercase font-black">Nível</span>
               <span className="text-sm md:text-lg font-black text-purple-700">{current + 1}/{questions.length}</span>
             </div>
+            <AudioPlayer/>
           </div>
         </div>
 

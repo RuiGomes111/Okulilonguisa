@@ -2,7 +2,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
+import AudioPlayer from "../components/audioplayer";
+import { useRef } from "react";
+import SoundEffects, { SoundEffectsHandle } from "../components/efeitosonoro";
 
 interface Question {
   question: string;
@@ -14,37 +16,44 @@ interface Question {
 const questions: Question[] = [
   {
     question: "Como se diz 'Bom dia' em Umbundu?",
-    options: ["Ukombe", "Utanya", "Kalunga", "Ocitali"],
-    answer: "Kalunga",
+    options: ["Ukombe", "Omele yiwa", "Kalunga", "Ocitali"],
+    img:"/mascote.png",
+    answer: "Omele yiwa",
   },
   {
-    question: "Qual o significado da palavra 'Ondaka'?",
-    options: ["Caminho", "Palavra", "Fogo", "Água"],
-    answer: "Palavra",
+    question: "Como se diz 'Boa tarde' em Umbundu?",
+    options: ["Ukombe", "o usa uwa", "Kalunga", "Ocitali"],
+    img:"/meninopasta.png",
+    answer: "o usa uwa",
   },
   {
-    question: "Como se diz 'Comer' em Umbundu?",
-    options: ["Okulia", "Okunyua", "Okupapa", "Okulala"],
-    answer: "Okulia",
+    question: "Como se diz 'Boa noite' em Umbundu?",
+    options: ["Okulia", "uteke uwa", "Okupapa", "Okulala"],
+    img:"/noite.png",
+    answer: "uteke uwa",
   },
   {
-    question: "O que significa 'Osandoke'?",
-    options: ["Alegria", "Tristeza", "Estrela", "Esperança"],
-    answer: "Estrela",
+    question: "Como se diz 'Boi' em Umbundu?",
+    options: ["Okulia", "Ongombe", "Onjou", "lya ou lha"],
+    img:"/boi.png",
+    answer: "Ongombe",
   },
   {
     question: "Como se chama 'Casa' em Umbundu?",
     options: ["Onjo", "Olonjo", "Ocipala", "Ocitala"],
+    img:"/casa.png",
     answer: "Onjo",
   },
   {
     question: "Qual destas palavras significa 'Mãe'?",
     options: ["Ina", "Tate", "Nandala", "Suku"],
+    img:"/family.png",
     answer: "Ina",
   },
   {
     question: "O que significa o verbo 'Okupopia'?",
     options: ["Correr", "Falar", "Dançar", "Trabalhar"],
+    img:"/falar.png",
     answer: "Falar",
   }
 ];
@@ -56,6 +65,8 @@ export default function Facil() {
   const [selected, setSelected] = useState<string | null>(null);
   const [finished, setFinished] = useState(false);
   const [locked, setLocked] = useState(false);
+  const soundRef = useRef<SoundEffectsHandle>(null);
+
 
   const colors = [
     "bg-blue-500 hover:bg-blue-600",
@@ -71,7 +82,12 @@ export default function Facil() {
     setLocked(true);
 
     const correct = questions[current].answer === option;
-    if (correct) setScore((s) => s + 1);
+    if (correct) {
+      setScore((s) => s + 1);
+      soundRef.current?.playCorrect();
+    } else {
+      soundRef.current?.playWrong();
+    }
 
     setTimeout(() => {
       const next = current + 1;
@@ -95,7 +111,9 @@ export default function Facil() {
 
   const q = questions[current];
 
-  if (finished && score> 7) {
+  if (finished && score >= 7
+    
+  ) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
         <div className="bg-white shadow-2xl rounded-3xl p-10 text-center w-full max-w-md">
@@ -108,7 +126,7 @@ export default function Facil() {
           <button className="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl transition active:scale-95 shadow-lg shadow-blue-200">
 
           <Link
-            href="../jogo_medio"
+            href="../jogo_dificil"
             
           >
             Proxímo Nível
@@ -149,7 +167,7 @@ export default function Facil() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
       <div className="w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/20">
-        
+        <SoundEffects ref={soundRef} />
        
         <div className="p-6 md:p-8 flex flex-col md:flex-row gap-4 md:gap-6">
           
@@ -191,6 +209,7 @@ export default function Facil() {
               <span className="text-sm md:text-lg font-black text-purple-700">{current + 1}/{questions.length}</span>
             </div>
           </div>
+          <AudioPlayer/>
         </div>
 
         {/* PERGUNTA E RESPOSTAS */}
