@@ -75,7 +75,7 @@ export default function Medio() {
   const [locked, setLocked] = useState(false);
   const soundRef = useRef<SoundEffectsHandle>(null);
 
-  const tocar= (path: any)=>{
+  const tocar= (path: string)=>{
     const audio = new Audio(path);
       audio.play().catch(error=>{
         console.error("erro", error);
