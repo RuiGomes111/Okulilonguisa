@@ -15,28 +15,28 @@ interface Question {
 
 const questions: Question[] = [
   {
-    question: "Como se diz 'Elefante' em Umbundu?",
-    options: ["Onjou", "Serpente", "Cavalo", "Pássaro"],
-    img: "/elephant.png",
-    answer: "Onjou",
+    question: "Como se diz 'Cão' em Umbundu?",
+    options: ["Okuvanja", "Ombwa", "Oku wala", "Okuenda"],
+    img: "/imgFacil/dog.png",
+    answer: "Ombwa",
   },
   {
-    question: "Como se diz 'Girafa' em Umbundu?",
-    options: ["Cavalo", "Macaco", "Onça", "Girafa"],
-    img: "/giraffe-OwMJToyS.png",
-    answer: "Girafa",
+    question: "Como se diz 'Galinha' em Umbundu?",
+    options: ["lha", "E hõndio", "Ongombe", "Osandji"],
+    img: "/imgFacil/galinha.png",
+    answer: "Osandji",
   },
   {
-    question: "Como se diz 'Leão' em Umbundu?",
-    options: ["Leopardo", "Hiena", "Javali", "Leão"],
-    img: "/lion-S2AAjwwL.png",
-    answer: "Leão",
+    question: "Como se diz 'Pasta' em Umbundu?",
+    options: ["Ekamba", "Otchisola", "Onjanelã", "Ocipete"],
+    img: "/imgFacil/bag.png",
+    answer: "Ocipete",
   },
   {
-    question: "Como se diz 'Coruja' em Umbundu?",
-    options: ["Coruja", "Porco", "Rato", "Sapo"],
-    img: "/owl-DBwZenDH.png",
-    answer: "Coruja",
+    question: "Como se diz 'Mão' em Umbundu?",
+    options: ["Eka", "Utwe/Utue", "Olomãi", "Omangu"],
+    img: "/imgFacil/hand.png",
+    answer: "Eka",
   },
 ];
 

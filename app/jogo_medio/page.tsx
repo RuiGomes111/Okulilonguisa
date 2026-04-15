@@ -11,55 +11,63 @@ interface Question {
   options: string[];
   img?: string;
   answer: string;
+  audio: string,
 }
 
 const questions: Question[] = [
   {
     question: "Como se diz 'Bom dia' em Umbundu?",
     options: ["Ukombe", "Omele yiwa", "Kalunga", "Ocitali"],
+    audio: "/certo.mp3",
     img:"/mascote.png",
     answer: "Omele yiwa",
   },
   {
     question: "Como se diz 'Boa tarde' em Umbundu?",
     options: ["Ukombe", "Kalunga","o usa uwa", "Ocitali"],
+    audio:"",
     img:"/meninopasta.png",
     answer: "o usa uwa",
   },
   {
     question: "Como se diz 'Boa noite' em Umbundu?",
     options: ["Okulia",  "Okupapa", "Okulala", "uteke uwa"],
+    audio:"",
     img:"/noite.png",
     answer: "uteke uwa",
   },
   {
     question: "Como se diz 'Boi' em Umbundu?",
     options: ["Ongombe","Okulia",  "Onjou", "lya ou lha"],
+    audio:"",
     img:"/boi.png",
     answer: "Ongombe",
   },
   {
     question: "Como se chama 'Casa' em Umbundu?",
     options: [ "Olonjo", "Ocipala","Onjo", "Ocitala"],
+    audio:"",
     img:"/casa.png",
     answer: "Onjo",
   },
   {
     question: "Qual destas palavras significa 'Mãe'?",
     options: ["Ina", "Tate", "Nandala", "Suku"],
+    audio:"",
     img:"/family.png",
     answer: "Ina",
   },
   {
     question: "O que significa o verbo 'Okupopia'?",
     options: ["Correr", "Falar", "Dançar", "Trabalhar"],
+    audio:"",
     img:"/falar.png",
     answer: "Falar",
   }
 ];
 
 
-export default function Facil() {
+export default function Medio() {
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -67,6 +75,13 @@ export default function Facil() {
   const [locked, setLocked] = useState(false);
   const soundRef = useRef<SoundEffectsHandle>(null);
 
+  const tocar= (path: any)=>{
+    const audio = new Audio(path);
+      audio.play().catch(error=>{
+        console.error("erro", error);
+      })
+    
+  }
 
   const colors = [
     "bg-blue-500 hover:bg-blue-600",
@@ -168,6 +183,7 @@ export default function Facil() {
     <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
       <div className="w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/20">
         <SoundEffects ref={soundRef} />
+        
        
         <div className="p-6 md:p-8 flex flex-col md:flex-row gap-4 md:gap-6">
           
@@ -210,12 +226,13 @@ export default function Facil() {
             </div>
           </div>
           <AudioPlayer/>
+          
         </div>
 
         {/* PERGUNTA E RESPOSTAS */}
         <div className="px-6 pb-8 md:px-8">
           <h1 className="text-xl md:text-2xl font-black text-gray-800 text-center mb-6 leading-tight">
-            {q.question}
+            <button className="bg-gray-700 rounded p-2 text-white " onClick={()=>tocar(q.audio)}> Ouvir Pergunta🎶</button>
           </h1>
 
           <div className="grid grid-cols-2 gap-3">
