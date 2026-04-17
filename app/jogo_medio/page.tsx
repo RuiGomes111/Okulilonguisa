@@ -75,7 +75,7 @@ export default function Medio() {
   const [locked, setLocked] = useState(false);
   const soundRef = useRef<SoundEffectsHandle>(null);
 
-  const tocar= (path: string)=>{
+  const tocar= (path: string)=>{ 
     const audio = new Audio(path);
       audio.play().catch(error=>{
         console.error("erro", error);
@@ -232,7 +232,7 @@ export default function Medio() {
         {/* PERGUNTA E RESPOSTAS */}
         <div className="px-6 pb-8 md:px-8">
           <h1 className="text-xl md:text-2xl font-black text-gray-800 text-center mb-6 leading-tight">
-            <button className="bg-gray-700 rounded p-2 text-white " onClick={()=>tocar(q.audio)}> Ouvir Pergunta🎶</button>
+            {q.question}
           </h1>
 
           <div className="grid grid-cols-2 gap-3">

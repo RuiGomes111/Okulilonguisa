@@ -11,7 +11,7 @@ const SoundEffects = forwardRef<SoundEffectsHandle>((_, ref) => {
   const correctRef = useRef<HTMLAudioElement | null>(null);
   const wrongRef = useRef<HTMLAudioElement | null>(null);
 
-  // função de vibração segura
+  //Função vibração 
   const vibrate = (pattern: number | number[]) => {
     if (typeof window !== "undefined" && "vibrate" in navigator) {
       navigator.vibrate(pattern);
