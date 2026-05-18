@@ -65,9 +65,7 @@ const nextStep = () => {
   };
 
   return (
-    <div className={`fixed inset-0 bg-black/80 flex items-center justify-center z-50 ${
-      open ? "hidden" : "block"
-    }`}>
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
       <div className="bg-white text-black p-6 rounded-2xl max-w-md w-full text-center">
         
         <h2 className="text-xl font-bold mb-3">
