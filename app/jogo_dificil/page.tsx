@@ -22,7 +22,7 @@ const questions: Question[] = [
     answer: "/imgDificil/odjamba.jpeg",
   },
   {
-    question: "/audios/omangu.mp3",
+    question: "/audios/Omangu.mp3",
     options: [  "/imgDificil/ongombe.jpeg","/imgDificil/odjamba.jpeg","/imgDificil/omangu.jpeg", "/imgDificil/ossanji.jpeg"],
     img: "/imgDificil/imgdificil.png",
     answer: "/imgDificil/omangu.jpeg",
