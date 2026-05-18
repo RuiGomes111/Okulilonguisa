@@ -27,17 +27,20 @@ const steps = [
 
 export default function GuiaJogo() {
   const [step, setStep] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
   // 1. Verifica se já viu. Se não viu, abre o guia.
   const visto = localStorage.getItem("guia_visto");
-  if (!visto) {
-    setOpen(true);
+   if (!visto) {
+    setTimeout(() => {
+      setOpen(true);
+    }, 0);
   }
+  
 
   // 2. Lógica do ESC
-  const handleEsc = (e) => {
+  const handleEsc = (e: KeyboardEvent) => {
     if (e.key === "Escape") setOpen(false);
   };
   window.addEventListener("keydown", handleEsc);
@@ -62,7 +65,9 @@ const nextStep = () => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+    <div className={`fixed inset-0 bg-black/80 flex items-center justify-center z-50 ${
+      open ? "hidden" : "block"
+    }`}>
       <div className="bg-white text-black p-6 rounded-2xl max-w-md w-full text-center">
         
         <h2 className="text-xl font-bold mb-3">
