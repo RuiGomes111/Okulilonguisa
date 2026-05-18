@@ -24,7 +24,7 @@ const SoundEffects = forwardRef<SoundEffectsHandle>((_, ref) => {
         correctRef.current.currentTime = 0;
         correctRef.current.play();
       }
-      vibrate(100); // vibração curta = acerto
+      vibrate(100); 
     },
 
     playWrong() {

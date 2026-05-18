@@ -6,6 +6,7 @@ import AudioPlayer from "../components/audioplayer";
 import { useRef } from "react";
 import SoundEffects, { SoundEffectsHandle } from "../components/efeitosonoro";
 
+
 interface Question {
   question: string;
   options: string[];
@@ -78,7 +79,7 @@ export default function Facil() {
       } else {
         setFinished(true);
       }
-    }, 500);
+    }, 2000);
   }
 
   function restart() {
@@ -210,12 +211,17 @@ export default function Facil() {
               let style = `${colors[index % colors.length]} text-white`;
 
               if (selected) {
-                if (isSelected && isCorrect)
+                if (isCorrect) {
+                  
                   style =
                     "bg-green-500 text-white scale-[1.03] shadow-lg shadow-green-100";
-                else if (isSelected && !isCorrect)
+                } else if (isSelected && !isCorrect) {
+                  
                   style = "bg-red-500 text-white";
-                else style = "bg-gray-100 text-gray-300 opacity-40 grayscale";
+                } else {
+                  
+                  style = "bg-gray-100 text-gray-300 opacity-40 grayscale";
+                }
               }
 
               return (

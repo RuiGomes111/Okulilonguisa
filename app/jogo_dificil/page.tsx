@@ -1,7 +1,250 @@
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import AudioPlayer from "../components/audioplayer";
+import { useRef } from "react";
+import SoundEffects, { SoundEffectsHandle } from "../components/efeitosonoro";
+
+
+interface Question {
+  question: string;
+  options: string[];
+  img?: string;
+  answer: string;
+}
+
+const questions: Question[] = [
+  {
+    question: "/audios/odjamba-.mp3",
+    options: ["/imgDificil/odjamba.jpeg", "/imgDificil/omangu.jpeg", "/imgDificil/ongombe.jpeg", "/imgDificil/ossanji.jpeg"],
+    img: "/imgDificil/imgdificil.png",
+    answer: "/imgDificil/odjamba.jpeg",
+  },
+  {
+    question: "/audios/omangu.mp3",
+    options: [  "/imgDificil/ongombe.jpeg","/imgDificil/odjamba.jpeg","/imgDificil/omangu.jpeg", "/imgDificil/ossanji.jpeg"],
+    img: "/imgDificil/imgdificil.png",
+    answer: "/imgDificil/omangu.jpeg",
+  },
+  {
+    question: "/audios/ongombe.mp3",
+    options: ["/imgDificil/odjamba.jpeg", "/imgDificil/omangu.jpeg", "/imgDificil/ongombe.jpeg", "/imgDificil/ossanji.jpeg"],
+    img: "/imgDificil/imgdificil.png",
+    answer: "/imgDificil/ongombe.jpeg",
+  },
+  {
+    question: "/audios/ossanji.mp3",
+    options: ["/imgDificil/odjamba.jpeg", "/imgDificil/omangu.jpeg", "/imgDificil/ongombe.jpeg", "/imgDificil/ossanji.jpeg"],
+    img: "/imgDificil/imgdificil.png",
+    answer: "/imgDificil/ossanji.jpeg",
+  },
+];
+
 export default function Dificil() {
-    return(
-        <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-            <h2>Em Construção</h2>
+  const [current, setCurrent] = useState(0);
+  const [score, setScore] = useState(0);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [finished, setFinished] = useState(false);
+  const [locked, setLocked] = useState(false);
+  const soundRef = useRef<SoundEffectsHandle>(null);
+
+  const colors = [
+    "bg-blue-500 hover:bg-blue-600",
+    "bg-purple-500 hover:bg-purple-600",
+    "bg-green-500 hover:bg-green-600",
+    "bg-orange-500 hover:bg-orange-600",
+  ];
+
+  function handleAnswer(option: string) {
+    if (locked) return;
+
+    setSelected(option);
+    setLocked(true);
+
+    const correct = questions[current].answer === option;
+    if (correct) {
+      setScore((s) => s + 1);
+      soundRef.current?.playCorrect();
+    } else {
+      soundRef.current?.playWrong();
+    }
+
+    setTimeout(() => {
+      const next = current + 1;
+      if (next < questions.length) {
+        setCurrent(next);
+        setSelected(null);
+        setLocked(false);
+      } else {
+        setFinished(true);
+      }
+    }, 2000);
+  }
+
+  function restart() {
+    setCurrent(0);
+    setScore(0);
+    setSelected(null);
+    setFinished(false);
+    setLocked(false);
+  }
+
+  const q = questions[current];
+
+  if (finished && score >= 4) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
+        <div className="bg-white shadow-2xl rounded-3xl p-10 text-center w-full max-w-md">
+          <h1 className="text-6xl mb-4">🏆</h1>
+          <h2 className="text-3xl font-bold text-gray-900">Excelente!</h2>
+          <p className="text-gray-500 mt-2">Resultado final</p>
+          <div className="mt-6 text-4xl font-black text-blue-600">
+            {score} / {questions.length}
+          </div>
+          
+          <Link
+            href="/"
+            className="block mt-6 text-gray-400 hover:text-gray-600 font-medium"
+          >
+            Voltar ao início
+          </Link>
         </div>
-    )
+      </div>
+    );
+  }
+
+  if (finished) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
+        <div className="bg-white shadow-2xl rounded-3xl p-10 text-center w-full max-w-md">
+          <h1 className="text-6xl mb-4">🏆</h1>
+          <h2 className="text-3xl font-bold text-gray-900">OH Que mal!</h2>
+          <p className="text-gray-500 mt-2">Resultado final</p>
+          <div className="mt-6 text-4xl font-black text-blue-600">
+            {score} / {questions.length}
+          </div>
+          <button
+            onClick={restart}
+            className="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl transition active:scale-95 shadow-lg shadow-blue-200"
+          >
+            Jogar novamente
+          </button>
+          <Link
+            href="/"
+            className="block mt-6 text-gray-400 hover:text-gray-600 font-medium"
+          >
+            Voltar ao início
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
+      <div className="w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/20">
+        <SoundEffects ref={soundRef} />
+
+        <div className="p-6 md:p-8 flex flex-col md:flex-row gap-4 md:gap-6">
+          {/* img */}
+          <div className="w-full md:w-2/3">
+            <div className="relative w-full h-48 md:h-60 bg-gray-100 rounded-3xl overflow-hidden border border-gray-200 shadow-inner">
+              {q.img ? (
+                <Image
+                  src={q.img}
+                  alt="Pergunta"
+                  fill
+                  className="object-contain p-2"
+                  priority
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-gray-300 font-bold uppercase tracking-widest text-xs">
+                  Sem Imagem
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/*header */}
+          <div className="flex flex-row md:flex-col gap-2 w-full md:w-1/3">
+            <Link
+              href="/"
+              className="flex-1 md:flex-none bg-red-50 text-red-500 border border-red-100 py-3 rounded-2xl text-xs md:text-sm font-black hover:bg-red-100 transition text-center uppercase tracking-tighter"
+            >
+              Sair
+            </Link>
+
+            <div className="flex-1 md:flex-none flex flex-col items-center justify-center bg-blue-50 rounded-2xl p-2 md:p-4 border border-blue-100">
+              <span className="text-[10px] md:text-xs text-blue-400 uppercase font-black">
+                Pontuação
+              </span>
+              <span className="text-base md:text-2xl font-black text-blue-600">
+                ⭐ {score}
+              </span>
+            </div>
+
+            <div className="flex-1 md:flex-none flex flex-col items-center justify-center bg-purple-50 rounded-2xl p-2 md:p-4 border border-purple-100">
+              <span className="text-[10px] md:text-xs text-purple-400 uppercase font-black">
+                Nível
+              </span>
+              <span className="text-sm md:text-lg font-black text-purple-700">
+                {current + 1}/{questions.length}
+              </span>
+            </div>
+            <AudioPlayer />
+          </div>
+        </div>
+
+        {/* PERGUNTA E RESPOSTAS */}
+        <div className="px-6 pb-8 md:px-8">
+          <h1 className="flex  text-xl md:text-lg font-black text-gray-800 text-center mb-6 leading-tight ml-3">            
+           <audio src={q.question} controls className="bg-amber-400 rounded w-90"></audio>
+          </h1>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 ">
+            {q.options.map((opt, index) => {
+              const isSelected = selected === opt;
+              const isCorrect = q.answer === opt;
+              let style = `${colors[index % colors.length]} text-white`;
+
+              if (selected) {
+                if (isCorrect) {
+                  
+                  style =
+                    "bg-green-500 text-white scale-[1.03] shadow-lg shadow-green-100";
+                } else if (isSelected && !isCorrect) {
+                  
+                  style = "bg-red-500 text-white";
+                } else {
+                  
+                  style = "bg-gray-100 text-gray-300 opacity-40 grayscale";
+                }
+              }
+
+              return (
+                <button
+                  key={index}
+                  onClick={() => handleAnswer(opt)}
+                  disabled={locked}
+                  className={`flex items-center justify-center w-full rounded-2xl font-bold text-sm md:text-base transition-all duration-300 transform active:scale-95 shadow-md ${style}`}
+                >
+                  <Image src={opt} alt="iamgem de opc" height={100} width={100}/>
+                  
+                </button>
+              );
+            })}
+          </div>
+
+          {/* barra de progresso */}
+          <div className="mt-8 h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-blue-600 transition-all duration-700 ease-in-out"
+              style={{ width: `${((current + 1) / questions.length) * 100}%` }}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -19,7 +19,7 @@ export default function AudioPlayer() {
 
   return (
     <div className="">
-      <audio ref={audioRef} src="/jogo.mp3" loop />
+      <audio ref={audioRef} src="/fundo.mp3" loop />
       <button 
         onClick={toggleSound}
         className="bg-black text-white px-4 py-2 rounded-full border border-white/20"
