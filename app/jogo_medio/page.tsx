@@ -17,21 +17,21 @@ interface Question {
 const questions: Question[] = [
   {
     question: "Como se diz 'Bom dia' em Umbundu?",
-    options: ["Ukombe", "Omele yiwa", "Kalunga", "Ocitali"],
+    options: ["Ukombe", "Walale", "Kalunga", "Wosala"],
     audio: "/certo.mp3",
     img: "/mascote.png",
-    answer: "Omele yiwa",
+    answer: "Walale",
   },
   {
     question: "Como se diz 'Boa tarde' em Umbundu?",
-    options: ["Ukombe", "Kalunga", "o usa uwa", "Ocitali"],
+    options: ["Wosala", "Kalunga", "Uteke uwa", "Walale"],
     audio: "",
     img: "/meninopasta.png",
-    answer: "o usa uwa",
+    answer: "Wosala",
   },
   {
     question: "Como se diz 'Boa noite' em Umbundu?",
-    options: ["Okulia", "Okupapa", "Okulala", "uteke uwa"],
+    options: ["Okulia", "Walale", "Okulala", "uteke uwa"],
     audio: "",
     img: "/noite.png",
     answer: "uteke uwa",
