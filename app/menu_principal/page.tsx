@@ -24,7 +24,7 @@ export default function MenuPrincipal() {
         className="flex flex-col gap-4 w-full max-w-sm items-center text-center"
       >
         <Link
-          href="../niveis"
+          href="../telaLogin"
           className="w-76 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold py-3 rounded-2xl transition duration-300 hover:scale-105 text-center"
         >
           🎯 Jogar

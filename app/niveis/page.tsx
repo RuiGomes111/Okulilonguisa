@@ -39,11 +39,12 @@ export default function Niveis() {
     },
   ];
 
+  const name = localStorage.getItem("name") as string;
   return (
     <div className="flex flex-col min-h-screen items-center justify-center gap-4 bg-gray-900 p-6">
       {/* Título */}
       <h1 className="text-3xl md:text-5xl font-extrabold text-white">
-        Escolher Nível
+        Olá {name} !
       </h1>
 
       <p className="text-gray-400 text-lg">
