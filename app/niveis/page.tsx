@@ -39,7 +39,12 @@ export default function Niveis() {
     },
   ];
 
-  const name = localStorage.getItem("name") as string;
+const name =
+  typeof window !== "undefined"
+    ? localStorage.getItem("name") || ""
+    : "";
+
+
   return (
     <div className="flex flex-col min-h-screen items-center justify-center gap-4 bg-gray-900 p-6">
       {/* Título */}

@@ -1,11 +1,11 @@
 "use client";
-import { useState } from "react";
+
 import Link from "next/link";
 import Image from "next/image";
 import AudioPlayer from "../components/audioplayer";
 import { useRef } from "react";
 import SoundEffects, { SoundEffectsHandle } from "../components/efeitosonoro";
-
+import {useState } from "react";
 
 interface Question {
   question: string;
@@ -41,6 +41,7 @@ const questions: Question[] = [
   },
 ];
 
+
 export default function Dificil() {
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
@@ -48,9 +49,18 @@ export default function Dificil() {
   const [finished, setFinished] = useState(false);
   const [locked, setLocked] = useState(false);
   const soundRef = useRef<SoundEffectsHandle>(null);
+  
 
-  const Name = localStorage.getItem("name" ) as string;
-  const Age = localStorage.getItem("age" ) as string;
+const name =
+  typeof window !== "undefined"
+    ? localStorage.getItem("name") || ""
+    : "";
+
+const age =
+  typeof window !== "undefined"
+    ? localStorage.getItem("age") || ""
+    : "";
+
   const colors = [
     "bg-blue-500 hover:bg-blue-600",
     "bg-purple-500 hover:bg-purple-600",
@@ -99,9 +109,9 @@ export default function Dificil() {
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
         <div className="bg-white shadow-2xl rounded-3xl p-10 text-center w-full max-w-md">
           <h1 className="text-6xl mb-4">🏆</h1>
-          <h2 className="text-3xl font-bold text-gray-900">​Cewa! {Name}</h2>
+          <h2 className="text-3xl font-bold text-gray-900">​Cewa! {name}</h2>
           <p className="text-gray-500 mt-2">
-            Muito bom para um(a) menino(a) de {Age} anos
+            Muito bom para um(a) menino(a) de {age} anos
           </p>
           <div className="mt-6 text-4xl font-black text-blue-600">
             {score} / {questions.length}
@@ -123,7 +133,7 @@ export default function Dificil() {
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
         <div className="bg-white shadow-2xl rounded-3xl p-10 text-center w-full max-w-md">
           <h1 className="text-6xl mb-4">🏆</h1>
-          <h2 className="text-3xl font-bold text-gray-900">​Civi! {Name}</h2>
+          <h2 className="text-3xl font-bold text-gray-900">​Civi! {name}</h2>
           <p className="text-gray-500 mt-2">Resultado final</p>
           <div className="mt-6 text-4xl font-black text-blue-600">
             {score} / {questions.length}
