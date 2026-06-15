@@ -109,7 +109,7 @@ const age =
 
   if (finished && score >= 5) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-300 via-sky-400 to-cyan-500 text-white p-4">
         <div className="bg-white shadow-2xl rounded-3xl p-10 text-center w-full max-w-md">
           <h1 className="text-6xl mb-4">🏆</h1>
           <h2 className="text-3xl font-bold text-gray-900">​Cewa! {name}</h2>
@@ -135,7 +135,7 @@ const age =
 
   if (finished) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-300 via-sky-400 to-cyan-500 text-white p-4">
         <div className="bg-white shadow-2xl rounded-3xl p-10 text-center w-full max-w-md">
           <h1 className="text-6xl mb-4">🏆</h1>
           <h2 className="text-3xl font-bold text-gray-900">
@@ -162,7 +162,7 @@ const age =
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-300 via-sky-400 to-cyan-500 p-4">
       <div className="w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/20">
         <SoundEffects ref={soundRef} />
 

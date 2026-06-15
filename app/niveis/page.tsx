@@ -46,13 +46,13 @@ const name =
 
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center gap-4 bg-gray-900 p-6">
+    <div className="flex flex-col min-h-screen items-center justify-center gap-4 bg-gradient-to-br from-blue-300 via-sky-400 to-cyan-500 p-6">
       {/* Título */}
-      <h1 className="text-3xl md:text-5xl font-extrabold text-white">
+      <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 drop-shadow-xl">
         Olá {name} !
       </h1>
 
-      <p className="text-gray-400 text-lg">
+      <p className="text-lg text-gray-700">
         Escolha seu desafio 🚀
       </p>
 

@@ -24,7 +24,7 @@ const handlesubmit = (e: React.FormEvent<HTMLFormElement>) => {
 }
 
     return (
-        <div className="flex flex-col min-h-screen items-center justify-center gap-4 bg-gray-900 p-6">
+        <div className="flex flex-col min-h-screen items-center justify-center gap-4 bg-gradient-to-br from-blue-300 via-sky-400 to-cyan-500 p-6">
       <form onSubmit={handlesubmit} className="bg-white shadow-2xl rounded-3xl p-10 text-center w-full max-w-md">
             <h1 className="text-6xl mb-4">🎮</h1>
             <h2 className="text-3xl font-bold text-gray-900">Bem-vindo!</h2>
